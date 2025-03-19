@@ -171,10 +171,19 @@ public class Collector : MonoBehaviour
 		Vector2 direction = new Vector2(
 			targetPickup.gameObject.transform.position.x - transform.position.x,//gameobj ekledim
 			targetPickup.gameObject.transform.position.y - transform.position.y);
+		
 
 		direction.Normalize();
 		rb2d.velocity = Vector2.zero;
-		rb2d.AddForce(direction * BaseImpulseForceMagnitude,
+		
+	//	rb2d.AddForce(direction * BaseImpulseForceMagnitude,
+		//	ForceMode2D.Impulse);
+		
+	//	change the GoToTargetPickup method to apply a force equal to the
+	//BaseImpulseForceMagnitude plus the ImpulseForceIncrement times the number of pickups currently in the game.MELIS
+
+	    float myforce=ImpulseForceIncrement*targets.Count + BaseImpulseForceMagnitude;
+		rb2d.AddForce(direction *myforce,
 			ForceMode2D.Impulse);
 	}
 	

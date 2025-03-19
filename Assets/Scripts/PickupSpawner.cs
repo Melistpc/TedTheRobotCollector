@@ -16,7 +16,8 @@ public class PickupSpawner : MonoBehaviour
 	// spawn control
     const float SpawnDelay = 0.3f;
 	Timer spawnTimer;
-    const int MaxNumPickups = 20;
+   // const int MaxNumPickups = 20; adamın
+   const int MaxNumPickups= 50; //benim
 
 	// spawn location support
     Vector3 location = Vector3.zero;
@@ -26,7 +27,8 @@ public class PickupSpawner : MonoBehaviour
 	float maxSpawnY;
 
 	// collision-free spawn support
-	const int MaxSpawnTries = 20;
+	//const int MaxSpawnTries = 20; adamın
+	const int MaxSpawnTries = 50;//benim
 	float pickupColliderRadius;
 	Vector2 min = new Vector2();
 	Vector2 max = new Vector2();
