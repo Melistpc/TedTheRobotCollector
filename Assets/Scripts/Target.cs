@@ -23,7 +23,7 @@ public class Target : IComparable
     /// </summary>
     /// <param name="gameObject">target game object</param>
     /// <param name="position">collector position</param>
-    public Target(GameObject gameObject, Vector3 position)
+    public Target(GameObject gameObject, Vector3 position) 
     {
         this.gameObject = gameObject;
         UpdateDistance(position);

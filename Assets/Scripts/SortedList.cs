@@ -129,6 +129,10 @@ public class SortedList<T> where T:IComparable
         else
         {
             items.RemoveAt(itemLocation);
+   
+            
+            count--;//melis
+            items.Sort();//melis 11.15
             Debug.Log($"Item '{item}' removed successfully.");
         }
     }
@@ -142,8 +146,10 @@ public class SortedList<T> where T:IComparable
     /// <returns>the index of the item or -1 if it's not found</returns>
     public int IndexOf(T item)
     {
+        Debug.Log("my items"+items.ToString());
         int lowerBound = 0;
-        int upperBound = items.Count - 1;
+       //int upperBound = items.Count - 1;
+       int upperBound = count-1; //count olmalı ama olmuyo boşları da alıyo o yüzden null veriyo
         int location = -1;
 
         // loop until found value or exhausted array
@@ -164,7 +170,7 @@ public class SortedList<T> where T:IComparable
                 // split data set to search appropriate side
                 if (middleValue.CompareTo(item) > 0)
                 {
-                    upperBound = middleLocation - 1;
+                    upperBound = middleLocation -1; //-1 di
                 }
                 else
                 {

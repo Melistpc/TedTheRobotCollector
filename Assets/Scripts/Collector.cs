@@ -110,7 +110,11 @@ public class Collector : MonoBehaviour
  
     void OnTriggerStay2D(Collider2D other)
     {
-	
+
+	    if (targets.Count > 0)
+	    {
+		    targetPickup = targets[targets.count - 1];//melis 14.45
+	    }
 	    if (targetPickup != null && other.gameObject == targetPickup.GameObject)
 	    {
 		 
@@ -121,18 +125,26 @@ public class Collector : MonoBehaviour
 		    }
 		    else
 		    {
-			    Debug.Log("Target not found in the list.");
+			    Debug.LogWarning("Target"+targetPickup+" not found in the list.");
 		    }
 
 		    //for (int i = 0; i < targets.Count; i++)
 		    for (int i = 0; i < targets.count; i++)
 		    
 		    {
+			    Debug.Log(targets.count);
+			    // Debug.Log(targets[i]);
 			    targets[i].UpdateDistance(transform.position);
+			   // targets.Sort();
 		    }
-
-		  
+		
 		    targets.Sort();
+				 targetPickup = targets[targets.count - 1];//melis ös
+			    SetTarget(targetPickup.GameObject);//ös
+		    
+
+		    
+		 
 
 		    //if (targets.Count > 0)
 		    if(targets.count > 0)
