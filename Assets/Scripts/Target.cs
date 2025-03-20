@@ -67,34 +67,6 @@ public class Target : IComparable
     }
 
 
-    /// <summary>
-    /// Compares the current instance with another object of the same type 
-    /// and returns an integer that indicates whether the current instance 
-    /// precedes, follows, or occurs in the same position in the sort order
-    /// as the other object.
-    /// </summary>
-    /// <returns>relative order of this instance and object</returns>
-    /// <param name="obj">object to compare to</param>
-  /*  public int CompareTo(object obj) //melis //overloadla 
-    {
-        Target other = obj as Target; //melis
-        if (other.Distance < Distance)
-        {
-            return -1;
-        }
-        else if (other.Distance > Distance)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-
-
-        // replace the code below with your implementation
-    } //melis
-*/
   public int CompareTo(object obj)
   {
       Target other = obj as Target;

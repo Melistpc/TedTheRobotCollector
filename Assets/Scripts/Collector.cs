@@ -58,6 +58,9 @@ public class Collector : MonoBehaviour
 	    if (target != null)
 	    {
 		    targets.Add(target);
+		    Debug.Log("My target spawned: "+target);
+		    Debug.Log("My target count is"+targets.count);
+		    
 	    }
 	    else
 	    {
@@ -69,12 +72,14 @@ public class Collector : MonoBehaviour
 
 	    if (targets.Count > 0)
 	    {
-		    nextTarget = targets[targets.Count - 1];
+		   // nextTarget = targets[targets.Count - 1]; melis
+		   nextTarget = targets[targets.count - 1];
 		    Debug.Log("My current target: " + nextTarget);
 	    }
 	    else
 	    {
 		    Debug.Log("Targets list is empty!");
+		    SetTarget(targetPickup.gameObject);//melis
 	    }
 
 	    if (nextTarget != null && target.Distance < nextTarget.Distance)
@@ -85,13 +90,7 @@ public class Collector : MonoBehaviour
 
 		    SetTarget(target.gameObject);
 	    }
-	    else if (nextTarget != null) 
-	    {
-		    Debug.Log("Short path: " + nextTarget);
-
-		    SetTarget(nextTarget.gameObject);
-	    }
-
+	
 	    Debug.Log("My sorted target list: " + targets);
     }
 
@@ -121,10 +120,12 @@ public class Collector : MonoBehaviour
 		    }
 		    else
 		    {
-			  //  Debug.LogError("Target not found in the list.");
+			    Debug.Log("Target not found in the list.");
 		    }
 
-		    for (int i = 0; i < targets.Count; i++)
+		    //for (int i = 0; i < targets.Count; i++)
+		    for (int i = 0; i < targets.count; i++)
+		    
 		    {
 			    targets[i].UpdateDistance(transform.position);
 		    }
@@ -134,7 +135,8 @@ public class Collector : MonoBehaviour
 
 		    if (targets.Count > 0)
 		    {
-			    targetPickup = targets[targets.Count - 1]; 
+			  //  targetPickup = targets[targets.Count - 1]; mel
+			   targetPickup = targets[targets.count - 1];
 			    SetTarget(targetPickup.GameObject);
 		    }
 		    else

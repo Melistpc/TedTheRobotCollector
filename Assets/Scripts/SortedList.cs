@@ -55,43 +55,11 @@ public class SortedList<T> where T:IComparable
 
     #region Methods
 
-    /// <summary>
-    /// Adds the given item to the list
-    /// </summary>
-    /// <param name="item">item</param>
+
+
+    public int count = 0;
     
-    /*
-    public void Add(T item)
-    {
-        // add your implementation below
- 
-        
-        if (items == null)
-        {
-            items = new List<T>();
-        }
-
-        if (items.Capacity == items.Count)
-        {
-            Expand();
-        }
-        // find location at which to add the item
-        int addLocation = 0;
-        while ((addLocation < items.Count) &&
-               (items[addLocation].CompareTo(item) < 0))
-        {
-            addLocation++;
- 
-
-        }
- 
-        
-        items.Insert(addLocation, item);
-       
-      
-    }*/
-
-    private int count = 0;
+    
     public void Add(T item)
     {
         
@@ -129,13 +97,12 @@ public class SortedList<T> where T:IComparable
     {
         T[] templist = new T[items.Count * ExpandMultiplyFactor]; //melis
 
-        // copy elements from old array into new array
+       
         for (int i = 0; i < items.Count; i++)
         {
             templist[i] = items[i];
         }
 
-        // change to use new array
         items = new List<T>(templist);//oldu mu emin değilim
     }
 
@@ -167,25 +134,6 @@ public class SortedList<T> where T:IComparable
     }
 
 
-    private void ShiftUp(int index)
-    {
-        for (int i = items.Count; i > index; i--)
-        {
-            items[i] = items[i - 1];
-        }
-    }
-
-    /// <summary>
-    /// Shifts all the array elements from the given index to the end of the array down one space
-    /// </summary>
-    /// <param name="index">the index at which to start shifting down</param>
-    private void ShiftDown(int index)
-    {
-        for (int i = index; i < items.Count; i++)
-        {
-            items[i - 1] = items[i];
-        }
-    }
 
     /// <summary>
     /// Determines the index of the given item using binary search
