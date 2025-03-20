@@ -132,7 +132,7 @@ public class SortedList<T> where T:IComparable
    
             
             count--;//melis
-            items.Sort();//melis 11.15
+          //  items.Sort();//melis 11.15 SORTLAMA BURDA NULLARI BASA ALIYO
             Debug.Log($"Item '{item}' removed successfully.");
         }
     }

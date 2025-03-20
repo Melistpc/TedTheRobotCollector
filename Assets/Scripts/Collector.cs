@@ -86,12 +86,14 @@ public class Collector : MonoBehaviour
 	    {
 		    Debug.Log("My list: " + targets);
 		    Debug.Log("Target " + target + " has a shorter distance than " + nextTarget);
-		    Debug.Log("Short path: " + target);
+		
 
 		    SetTarget(target.gameObject);
 	    }
 	
+	 
 	    SetTarget(nextTarget.gameObject);//melis
+	    
 	    Debug.Log("My sorted target list: " + targets);
     }
 
@@ -133,19 +135,16 @@ public class Collector : MonoBehaviour
 		    
 		    {
 			    Debug.Log(targets.count);
+			  
+			
 			    // Debug.Log(targets[i]);
 			    targets[i].UpdateDistance(transform.position);
 			   // targets.Sort();
 		    }
-		
-		    targets.Sort();
-				 targetPickup = targets[targets.count - 1];//melis ös
-			    SetTarget(targetPickup.GameObject);//ös
-		    
-
-		    
 		 
-
+		   // targets.Sort();
+		    Debug.Log("MY TARGET"+targets);
+	
 		    //if (targets.Count > 0)
 		    if(targets.count > 0)
 		    {
