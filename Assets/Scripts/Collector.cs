@@ -91,6 +91,7 @@ public class Collector : MonoBehaviour
 		    SetTarget(target.gameObject);
 	    }
 	
+	    SetTarget(nextTarget.gameObject);//melis
 	    Debug.Log("My sorted target list: " + targets);
     }
 
@@ -133,7 +134,8 @@ public class Collector : MonoBehaviour
 		  
 		    targets.Sort();
 
-		    if (targets.Count > 0)
+		    //if (targets.Count > 0)
+		    if(targets.count > 0)
 		    {
 			  //  targetPickup = targets[targets.Count - 1]; mel
 			   targetPickup = targets[targets.count - 1];
