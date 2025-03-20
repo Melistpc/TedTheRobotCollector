@@ -139,10 +139,10 @@ public class Collector : MonoBehaviour
 			
 			    // Debug.Log(targets[i]);
 			    targets[i].UpdateDistance(transform.position);
-			   // targets.Sort();
+			    
 		    }
 		 
-		   // targets.Sort();
+		    targets.Sort();//16.40
 		    Debug.Log("MY TARGET"+targets);
 	
 		    //if (targets.Count > 0)
