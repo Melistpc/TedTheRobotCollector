@@ -63,12 +63,7 @@ public class SortedList<T> where T:IComparable
     public void Add(T item)
     {
         
-
-        if (item == null)
-        {
-            Debug.LogError("Attempting to add a null item.");
-            return;
-        }
+        
 
         if (items == null)
         {
@@ -82,9 +77,12 @@ public class SortedList<T> where T:IComparable
         }
 
         int addLocation = 0;
+        items.OrderBy(i => i == null).ThenBy(i => i); //https://stackoverflow.com/questions/3163657/how-can-you-do-custom-sorting-in-linq-with-null-always-on-the-end
      //   while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
         while (addLocation < count && items[addLocation].CompareTo(item) < 0)
         {
+           
+           // items[addlocation] ı null veriyor çünkü o an MY TARGET ,,,,10.5,2.3,
             addLocation++;
         }
 
@@ -129,10 +127,13 @@ public class SortedList<T> where T:IComparable
         else
         {
             items.RemoveAt(itemLocation);
+           
+            
    
             
             count--;//melis
           //  items.Sort();//melis 11.15 SORTLAMA BURDA NULLARI BASA ALIYO
+       
             Debug.Log($"Item '{item}' removed successfully.");
         }
     }
@@ -146,7 +147,7 @@ public class SortedList<T> where T:IComparable
     /// <returns>the index of the item or -1 if it's not found</returns>
     public int IndexOf(T item)
     {
-        Debug.Log("my items"+items.ToString());
+      
         int lowerBound = 0;
        //int upperBound = items.Count - 1;
        int upperBound = count-1; //count olmalı ama olmuyo boşları da alıyo o yüzden null veriyo
@@ -187,6 +188,8 @@ public class SortedList<T> where T:IComparable
     public void Sort()
     {
         items.Sort();
+      //  items.OrderBy(i => i == null).ThenBy(i => i); 
+        
     }
 
     /// <summary>
@@ -210,4 +213,5 @@ public class SortedList<T> where T:IComparable
     #endregion
 
 
+ 
 }

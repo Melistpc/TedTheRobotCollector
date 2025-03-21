@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 /// <summary>
 /// A collecting game object
@@ -124,10 +125,13 @@ public class Collector : MonoBehaviour
 		    if (targetIndex != -1)
 		    {
 			    targets.RemoveAt(targetPickup);
+			    Destroy(targetPickup.gameObject);
+			 //   targetPickup.gameObject.SetActive(false);//melis 21.03
+			   
 		    }
 		    else
 		    {
-			    Debug.LogWarning("Target"+targetPickup+" not found in the list.");
+			    Debug.LogError("Target"+targetPickup+" not found in the list.");
 		    }
 
 		    //for (int i = 0; i < targets.Count; i++)
@@ -136,20 +140,23 @@ public class Collector : MonoBehaviour
 		    {
 			    Debug.Log(targets.count);
 			  
-			
+			    
 			    // Debug.Log(targets[i]);
 			    targets[i].UpdateDistance(transform.position);
-			    
+
+			   
+
 		    }
-		 
-		    targets.Sort();//16.40
+		    targets.Sort();
+		 		    
+
 		    Debug.Log("MY TARGET"+targets);
 	
 		    //if (targets.Count > 0)
 		    if(targets.count > 0)
 		    {
 			  //  targetPickup = targets[targets.Count - 1]; mel
-			   targetPickup = targets[targets.count - 1];
+			  targetPickup = targets[targets.count - 1];
 			    SetTarget(targetPickup.GameObject);
 		    }
 		    else
