@@ -8,23 +8,22 @@ using UnityEngine;
 /// <summary>
 /// A sorted list
 /// </summary>
-public class SortedList<T> where T:IComparable
+public class SortedList<T> where T : IComparable
 {
     List<T> items = new List<T>();
 
 
     // used in Add method
     List<T> tempList = new List<T>();
-	
-    #region Constructors
 
+    #region Constructors
 
     /// <summary>
     /// No argument constructor
     /// </summary>
     public SortedList()
     {
-       items.Sort();//melis
+        items.Sort(); //melis
     }
 
     #endregion
@@ -39,7 +38,7 @@ public class SortedList<T> where T:IComparable
     {
         get { return items.Count; }
     }
-	
+
     /// <summary>
     /// Gets the item in the list at the given index
     /// This property allows access using [ and ]
@@ -55,57 +54,49 @@ public class SortedList<T> where T:IComparable
 
     #region Methods
 
-
-
-    public int count = 0;
-    
-    
     public void Add(T item)
     {
-        
-        
-
         if (items == null)
         {
             items = new List<T>();
             Debug.LogWarning("Items list was null, initializing it now.");
         }
 
-        if (items.Capacity == items.Count)
+       /* if (items.Capacity == items.Count)
         {
             Expand();
-        }
+        }*/
 
         int addLocation = 0;
-        items.OrderBy(i => i == null).ThenBy(i => i); //https://stackoverflow.com/questions/3163657/how-can-you-do-custom-sorting-in-linq-with-null-always-on-the-end
-     //   while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
-        while (addLocation < count && items[addLocation].CompareTo(item) < 0)
+      //  items.OrderBy(i => i == null).ThenBy(i => i); //https://stackoverflow.com/questions/3163657/how-can-you-do-custom-sorting-in-linq-with-null-always-on-the-end
+        //   while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
+        items.Sort();
+        while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
         {
-           
-           // items[addlocation] ı null veriyor çünkü o an MY TARGET ,,,,10.5,2.3,
+            // items[addlocation] ı null veriyor çünkü o an MY TARGET ,,,,10.5,2.3,
             addLocation++;
         }
 
 
         items.Insert(addLocation, item);
-        count++;
+   
     }
 
-    protected void Expand()
+  /*  protected void Expand()
     {
         T[] templist = new T[items.Count * ExpandMultiplyFactor]; //melis
 
-       
+
         for (int i = 0; i < items.Count; i++)
         {
             templist[i] = items[i];
         }
 
-        items = new List<T>(templist);//oldu mu emin değilim
+        items = new List<T>(templist); //oldu mu emin değilim
     }
 
-    private static  int ExpandMultiplyFactor = 2;//melis
-
+    private static int ExpandMultiplyFactor = 2; //melis
+*/
 
     /// <summary>
     /// Removes the item at the given index from the list
@@ -127,17 +118,14 @@ public class SortedList<T> where T:IComparable
         else
         {
             items.RemoveAt(itemLocation);
-           
+
+
             
-   
-            
-            count--;//melis
-          //  items.Sort();//melis 11.15 SORTLAMA BURDA NULLARI BASA ALIYO
-       
+            //  items.Sort();//melis 11.15 SORTLAMA BURDA NULLARI BASA ALIYO
+
             Debug.Log($"Item '{item}' removed successfully.");
         }
     }
-
 
 
     /// <summary>
@@ -147,15 +135,14 @@ public class SortedList<T> where T:IComparable
     /// <returns>the index of the item or -1 if it's not found</returns>
     public int IndexOf(T item)
     {
-      
         int lowerBound = 0;
-       //int upperBound = items.Count - 1;
-       int upperBound = count-1; //count olmalı ama olmuyo boşları da alıyo o yüzden null veriyo
+        int upperBound = items.Count - 1;
+    
         int location = -1;
 
         // loop until found value or exhausted array
         while ((location == -1) &&
-            (lowerBound <= upperBound))
+               (lowerBound <= upperBound))
         {
             // find the middle
             int middleLocation = lowerBound + (upperBound - lowerBound) / 2;
@@ -171,7 +158,7 @@ public class SortedList<T> where T:IComparable
                 // split data set to search appropriate side
                 if (middleValue.CompareTo(item) > 0)
                 {
-                    upperBound = middleLocation -1; //-1 di
+                    upperBound = middleLocation - 1; //-1 di
                 }
                 else
                 {
@@ -179,6 +166,7 @@ public class SortedList<T> where T:IComparable
                 }
             }
         }
+
         return location;
     }
 
@@ -188,8 +176,7 @@ public class SortedList<T> where T:IComparable
     public void Sort()
     {
         items.Sort();
-      //  items.OrderBy(i => i == null).ThenBy(i => i); 
-        
+        //  items.OrderBy(i => i == null).ThenBy(i => i); 
     }
 
     /// <summary>
@@ -207,11 +194,9 @@ public class SortedList<T> where T:IComparable
                 stringBuilder.Append(',');
             }
         }
+
         return stringBuilder.ToString();
     }
 
     #endregion
-
-
- 
 }

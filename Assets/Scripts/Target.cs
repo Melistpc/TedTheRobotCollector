@@ -23,7 +23,7 @@ public class Target : IComparable
     /// </summary>
     /// <param name="gameObject">target game object</param>
     /// <param name="position">collector position</param>
-    public Target(GameObject gameObject, Vector3 position) 
+    public Target(GameObject gameObject, Vector3 position)
     {
         this.gameObject = gameObject;
         UpdateDistance(position);
@@ -67,28 +67,23 @@ public class Target : IComparable
     }
 
 
-  public int CompareTo(object obj)
-  {
-      Target other = obj as Target;
-      if (other == null || this.gameObject == null || other.gameObject == null)
-      {
-          Debug.LogError("Cannot compare targets with null gameObject.");
-          return 0; 
-      }
-
-      if (other.Distance < Distance)
-      {
-          return -1;
-      }
-      else if (other.Distance > Distance)
-      {
-          return 1;
-      }
-      else
-      {
-          return 0;
-      }
-  }
+    public int CompareTo(object obj)
+    {
+        Target other = obj as Target;
+        
+        if (other.Distance < Distance)
+        {
+            return -1;
+        }
+        else if (other.Distance > Distance)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     /// <summary>
     /// Converts the target to a string
