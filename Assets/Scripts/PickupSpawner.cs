@@ -93,8 +93,15 @@ public class PickupSpawner : MonoBehaviour
 		if (GameObject.FindGameObjectsWithTag("Pickup").Length < MaxNumPickups)
         {
 			SpawnPickup();
+			
 		}
-        spawnTimer.Run();
+		spawnTimer.Run();
+        if (GameObject.FindGameObjectsWithTag("Pickup").Length >= MaxNumPickups)//melis
+        {
+	        spawnTimer.Stop();
+	        Debug.Log("SPAWN FINISHED");
+        }
+       
 	}
 
 	/// <summary>

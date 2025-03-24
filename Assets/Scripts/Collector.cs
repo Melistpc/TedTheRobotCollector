@@ -151,10 +151,14 @@ public class Collector : MonoBehaviour
     /// <param name="pickup">Pickup.</param>
     void SetTarget(GameObject pickup)
     {
-        targetPickup = new Target(pickup, transform.position);
-        //targetPickup.gameObject = pickup; //gameobject ekledim
-        // Debug.Log(targetPickup);//melis
-        GoToTargetPickup();
+        if (targets.Count > 0)//melis artık null for updatedistance vermiyo
+        {
+            targetPickup = new Target(pickup, transform.position);
+            //targetPickup.gameObject = pickup; //gameobject ekledim
+            // Debug.Log(targetPickup);//melis
+            GoToTargetPickup();
+        }
+        
     }
 
     /// <summary>
@@ -177,10 +181,13 @@ public class Collector : MonoBehaviour
 
         //	change the GoToTargetPickup method to apply a force equal to the
         //BaseImpulseForceMagnitude plus the ImpulseForceIncrement times the number of pickups currently in the game.MELIS
-
-        float myforce = ImpulseForceIncrement * targets.Count + BaseImpulseForceMagnitude;
-        rb2d.AddForce(direction * myforce,
-            ForceMode2D.Impulse);
+        
+      
+            float myforce = ImpulseForceIncrement * targets.Count + BaseImpulseForceMagnitude;
+            rb2d.AddForce(direction * myforce,
+                ForceMode2D.Impulse);
+        
+     
     }
 
     #endregion
