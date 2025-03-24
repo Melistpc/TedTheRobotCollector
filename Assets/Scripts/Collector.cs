@@ -56,7 +56,7 @@ public class Collector : MonoBehaviour
         }
 
         Target target = new Target(pickUpObj, pickUpObj.transform.position);
-        Debug.Log(pickUpObj.name);
+       // Debug.Log("pickup name" + pickUpObj.name +"and position" + pickUpObj.transform.position);
         targets.Add(target);
         Target nextTarget = target;
 
@@ -103,7 +103,7 @@ public class Collector : MonoBehaviour
             if (targetIndex != -1)
             {
                 targets.RemoveAt(targetPickup);
-                // Destroy(targetPickup.gameObject);
+                 //Destroy(targetPickup.gameObject);
                 //  targetPickup.gameObject.SetActive(false);//melis 21.03
             }
             else
