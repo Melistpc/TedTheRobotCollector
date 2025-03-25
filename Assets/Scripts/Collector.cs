@@ -102,8 +102,11 @@ public class Collector : MonoBehaviour
             int targetIndex = targets.IndexOf(targetPickup);
             if (targetIndex != -1)
             {
-                targets.RemoveAt(targetPickup);
-                 //Destroy(targetPickup.gameObject);
+                
+                int itemLocation = targets.IndexOf(targetPickup);
+                targets.RemoveAt(itemLocation);
+               // targets.RemoveAt(targetPickup);
+                // Destroy(targetPickup.gameObject);
                 //  targetPickup.gameObject.SetActive(false);//melis 21.03
             }
             else

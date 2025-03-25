@@ -74,7 +74,7 @@ public class SortedList<T> where T : IComparable
         items.Sort();
         while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
         {
-            // items[addlocation] ı null veriyor çünkü o an MY TARGET ,,,,10.5,2.3,
+          
             addLocation++;
         }
 
@@ -103,15 +103,15 @@ public class SortedList<T> where T : IComparable
     /// Removes the item at the given index from the list
     /// </summary>
     /// <param name="index">index</param>
-    public void RemoveAt(T item)
+    public void RemoveAt(int item)
     {
-        if (item == null)
+       /* if (item == null)
         {
             Debug.LogError("Attempting to remove a null item.");
             return;
         }
 
-        int itemLocation = IndexOf(item);
+        int itemLocation = IndexOf(item);//Bunu remove den önce yapıp sonra itemlocation u direk atmamızı istiyor
         if (itemLocation == -1)
         {
             Debug.LogError($"Item '{item}' not found in the list.");
@@ -119,14 +119,13 @@ public class SortedList<T> where T : IComparable
         else
         {
             items.RemoveAt(itemLocation);
-            
-
-
-            
+   
             //  items.Sort();//melis 11.15 SORTLAMA BURDA NULLARI BASA ALIYO
 
             Debug.Log($"Item '{item}' removed successfully.");
-        }
+        }*/
+       items.RemoveAt(item);
+       
     }
 
 
