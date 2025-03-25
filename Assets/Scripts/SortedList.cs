@@ -55,7 +55,7 @@ public class SortedList<T> where T : IComparable
 
     #region Methods
 
-    public void Add(T item)
+    public void AddAndSort(T item)
     {
         if (items == null)
         {
@@ -63,41 +63,23 @@ public class SortedList<T> where T : IComparable
             Debug.LogWarning("Items list was null, initializing it now.");
         }
 
-       /* if (items.Capacity == items.Count)
-        {
-            Expand();
-        }*/
+        /* if (items.Capacity == items.Count)
+         {
+             Expand();
+         }*/
 
         int addLocation = 0;
-      //  items.OrderBy(i => i == null).ThenBy(i => i); //https://stackoverflow.com/questions/3163657/how-can-you-do-custom-sorting-in-linq-with-null-always-on-the-end
-        //   while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
+
         items.Sort();
         while (addLocation < items.Count && items[addLocation].CompareTo(item) < 0)
         {
-          
             addLocation++;
         }
 
 
         items.Insert(addLocation, item);
-   
     }
 
-  /*  protected void Expand()
-    {
-        T[] templist = new T[items.Count * ExpandMultiplyFactor]; //melis
-
-
-        for (int i = 0; i < items.Count; i++)
-        {
-            templist[i] = items[i];
-        }
-
-        items = new List<T>(templist); //oldu mu emin değilim
-    }
-
-    private static int ExpandMultiplyFactor = 2; //melis
-*/
 
     /// <summary>
     /// Removes the item at the given index from the list
@@ -105,27 +87,7 @@ public class SortedList<T> where T : IComparable
     /// <param name="index">index</param>
     public void RemoveAt(int item)
     {
-       /* if (item == null)
-        {
-            Debug.LogError("Attempting to remove a null item.");
-            return;
-        }
-
-        int itemLocation = IndexOf(item);//Bunu remove den önce yapıp sonra itemlocation u direk atmamızı istiyor
-        if (itemLocation == -1)
-        {
-            Debug.LogError($"Item '{item}' not found in the list.");
-        }
-        else
-        {
-            items.RemoveAt(itemLocation);
-   
-            //  items.Sort();//melis 11.15 SORTLAMA BURDA NULLARI BASA ALIYO
-
-            Debug.Log($"Item '{item}' removed successfully.");
-        }*/
-       items.RemoveAt(item);
-       
+        items.RemoveAt(item);
     }
 
 
@@ -138,7 +100,7 @@ public class SortedList<T> where T : IComparable
     {
         int lowerBound = 0;
         int upperBound = items.Count - 1;
-    
+
         int location = -1;
 
         // loop until found value or exhausted array
@@ -200,4 +162,9 @@ public class SortedList<T> where T : IComparable
     }
 
     #endregion
+
+    public T Last()
+    {
+        return items[items.Count - 1];
+    }
 }

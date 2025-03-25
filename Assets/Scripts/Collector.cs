@@ -55,33 +55,11 @@ public class Collector : MonoBehaviour
             return;
         }
 
-        Target target = new Target(pickUpObj, pickUpObj.transform.position);
-       // Debug.Log("pickup name" + pickUpObj.name +"and position" + pickUpObj.transform.position);
-        targets.Add(target);
-        Target nextTarget = target;
+        Target newTarget = new Target(pickUpObj, pickUpObj.transform.position);
 
+        targets.AddAndSort(newTarget);
 
-        // nextTarget = targets[targets.Count - 1]; melis
-      
-        if(targets.Count > 1)
-        {
-            nextTarget = targets[targets.Count - 1];
-        }
-       
-
-        if (nextTarget != null && target.Distance < nextTarget.Distance)
-        {
-            Debug.Log("My list: " + targets);
-            Debug.Log("Target " + target + " has a shorter distance than " + nextTarget);
-
-
-            SetTarget(target.gameObject);
-        }
-
-
-        SetTarget(nextTarget.gameObject); //melis
-
-        Debug.Log("My sorted target list: " + targets);
+        SetTarget();
     }
 
 
@@ -92,57 +70,23 @@ public class Collector : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerStay2D(Collider2D other)
     {
-        if (targets.Count > 0)
+        if (other.gameObject == targetPickup.GameObject)
         {
-            targetPickup = targets[targets.Count - 1]; //melis 14.45
-        }
+            targets.RemoveAt(targets.Count - 1);
 
-        if (targetPickup != null && other.gameObject == targetPickup.GameObject)
-        {
-            int targetIndex = targets.IndexOf(targetPickup);
-            if (targetIndex != -1)
-            {
-                
-                int itemLocation = targets.IndexOf(targetPickup);
-                targets.RemoveAt(itemLocation);
-               // targets.RemoveAt(targetPickup);
-                // Destroy(targetPickup.gameObject);
-                //  targetPickup.gameObject.SetActive(false);//melis 21.03
-            }
-            else
-            {
-                Debug.LogError("Target" + targetPickup + " not found in the list.");
-            }
-
-            //for (int i = 0; i < targets.Count; i++)
             for (int i = 0; i < targets.Count; i++)
-
             {
-                Debug.Log(targets.Count);
-
-
-                // Debug.Log(targets[i]);
                 targets[i].UpdateDistance(transform.position);
             }
 
-          
-            targets.Sort();
 
-
-            Debug.Log("MY TARGET" + targets);
-
-            //if (targets.Count > 0)
             if (targets.Count > 0)
             {
-                //  targetPickup = targets[targets.Count - 1]; mel
-                targetPickup = targets[targets.Count - 1];
-                SetTarget(targetPickup.GameObject);
+                SetTarget();
             }
             else
             {
                 targetPickup = null;
-                SetTarget(null);
-                Debug.Log("Targets list finished");
             }
         }
     }
@@ -152,16 +96,13 @@ public class Collector : MonoBehaviour
     /// Sets the target pickup to the provided pickup
     /// </summary>
     /// <param name="pickup">Pickup.</param>
-    void SetTarget(GameObject pickup)
+    void SetTarget()
     {
-        if (targets.Count > 0)//melis artık null for updatedistance vermiyo
+        if (targets.Count > 0)
         {
-            targetPickup = new Target(pickup, transform.position);
-            //targetPickup.gameObject = pickup; //gameobject ekledim
-            // Debug.Log(targetPickup);//melis
+            targetPickup = targets.Last();
             GoToTargetPickup();
         }
-        
     }
 
     /// <summary>
@@ -169,28 +110,15 @@ public class Collector : MonoBehaviour
     /// </summary>
     void GoToTargetPickup()
     {
-        // calculate direction to target pickup and start moving toward it
-
         Vector2 direction = new Vector2(
-            targetPickup.gameObject.transform.position.x - transform.position.x, //gameobj ekledim
+            targetPickup.gameObject.transform.position.x - transform.position.x,
             targetPickup.gameObject.transform.position.y - transform.position.y);
-
-
         direction.Normalize();
         rb2d.velocity = Vector2.zero;
-
-        //	rb2d.AddForce(direction * BaseImpulseForceMagnitude,
-        //	ForceMode2D.Impulse);
-
-        //	change the GoToTargetPickup method to apply a force equal to the
-        //BaseImpulseForceMagnitude plus the ImpulseForceIncrement times the number of pickups currently in the game.MELIS
         
-      
-            float myforce = ImpulseForceIncrement * targets.Count + BaseImpulseForceMagnitude;
-            rb2d.AddForce(direction * myforce,
-                ForceMode2D.Impulse);
-        
-     
+        float myforce = ImpulseForceIncrement * targets.Count + BaseImpulseForceMagnitude;
+        rb2d.AddForce(direction * myforce,
+            ForceMode2D.Impulse);
     }
 
     #endregion
